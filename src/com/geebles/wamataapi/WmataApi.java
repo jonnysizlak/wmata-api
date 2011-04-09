@@ -5,6 +5,21 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 
+
+import com.geebles.wamataapi.json.JsonBusRoutes;
+import com.geebles.wamataapi.json.JsonElevatorEscalatorIncidentResults;
+import com.geebles.wamataapi.json.JsonLinesResult;
+import com.geebles.wamataapi.json.JsonRailIncidentResults;
+import com.geebles.wamataapi.json.JsonStationEntrances;
+import com.geebles.wamataapi.json.JsonStationPredictionResults;
+import com.geebles.wamataapi.json.JsonStationsResult;
+import com.geebles.wamataapi.wmata.WmataBusRoute;
+import com.geebles.wamataapi.wmata.WmataElevatorEscalatorIncident;
+import com.geebles.wamataapi.wmata.WmataLine;
+import com.geebles.wamataapi.wmata.WmataRailIncident;
+import com.geebles.wamataapi.wmata.WmataStation;
+import com.geebles.wamataapi.wmata.WmataStationEntrance;
+import com.geebles.wamataapi.wmata.WmataStationPrediction;
 import com.google.gson.Gson;
 
 public class WmataApi {
