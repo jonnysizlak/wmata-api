@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 
-
 import com.geebles.wamataapi.json.JsonBusRoutes;
 import com.geebles.wamataapi.json.JsonElevatorEscalatorIncidentResults;
 import com.geebles.wamataapi.json.JsonLinesResult;
@@ -104,62 +103,66 @@ public class WmataApi {
 
 	private List<WmataBusRoute> getAllBusRoutes(String apiKey) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/Bus.svc/json/JRoutes?api_key=" + apiKey);
-		JsonBusRoutes routes = gson.fromJson(json, JsonBusRoutes.class);
+		JsonBusRoutes routes = fromJson(json, JsonBusRoutes.class);
 		return routes.routes;
 	}
 
 	private List<WmataStationEntrance> getAllStationEntrances(String apiKey) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/Rail.svc/json/JStationEntrances?api_key=" + apiKey);
-		JsonStationEntrances entrances = gson.fromJson(json, JsonStationEntrances.class);
+		JsonStationEntrances entrances = fromJson(json, JsonStationEntrances.class);
 		return entrances.entrances;
 	}
 
 	private List<WmataStationEntrance> getStationEntrances(String lat, String lon, int radius, String apiKey) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/Rail.svc/json/JStationEntrances?lat=" + lat + "&lon=" + lon + "&radius=" + radius + "&api_key=" + apiKey);
-		JsonStationEntrances entrances = gson.fromJson(json, JsonStationEntrances.class);
+		JsonStationEntrances entrances = fromJson(json, JsonStationEntrances.class);
 		return entrances.entrances;
 	}
 
 	private List<WmataElevatorEscalatorIncident> getElevatorEscalatorIncidents(String apiKey) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/Incidents.svc/json/ElevatorIncidents?api_key=" + apiKey);
-		JsonElevatorEscalatorIncidentResults incidents = gson.fromJson(json, JsonElevatorEscalatorIncidentResults.class);
+		JsonElevatorEscalatorIncidentResults incidents = fromJson(json, JsonElevatorEscalatorIncidentResults.class);
 		return incidents.incidents;
 	}
 
 	private List<WmataRailIncident> getRailIncidents(String apiKey) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/Incidents.svc/json/Incidents?api_key=" + apiKey);
-		JsonRailIncidentResults incidents = gson.fromJson(json, JsonRailIncidentResults.class);
+		JsonRailIncidentResults incidents = fromJson(json, JsonRailIncidentResults.class);
 		return incidents.incidents;
 	}
 
 	private List<WmataStationPrediction> getStationPredictions(String apiKey, String stationCode) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/StationPrediction.svc/json/GetPrediction/" + stationCode + "?api_key=" + apiKey);
-		JsonStationPredictionResults predicitions = gson.fromJson(json, JsonStationPredictionResults.class);
+		JsonStationPredictionResults predicitions = fromJson(json, JsonStationPredictionResults.class);
 		return predicitions.predictions;
 	}
 
 	private List<WmataStationPrediction> getAllStationPredictions(String apiKey) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/StationPrediction.svc/json/GetPrediction/All?api_key=" + apiKey);
-		JsonStationPredictionResults predicitions = gson.fromJson(json, JsonStationPredictionResults.class);
+		JsonStationPredictionResults predicitions = fromJson(json, JsonStationPredictionResults.class);
 		return predicitions.predictions;
 	}
 
 	private WmataStation getStationInfo(String apiKey, String stationCode) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/Rail.svc/json/JStationInfo?StationCode=" + stationCode + "&api_key=" + apiKey);
-		WmataStation station = gson.fromJson(json, WmataStation.class);
+		WmataStation station = fromJson(json, WmataStation.class);
 		return station;
 	}
 
 	private List<WmataStation> getAllStationsForLine(String apiKey, String lineCode) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/Rail.svc/json/JStations?LineCode=" + lineCode + "&api_key=" + apiKey);
-		JsonStationsResult stations = gson.fromJson(json, JsonStationsResult.class);
+		JsonStationsResult stations = fromJson(json, JsonStationsResult.class);
 		return stations.stations;
 	}
 
 	private List<WmataLine> getAllLines(String apiKey) throws Exception {
 		String json = getJsonFromUrl("http://api.wmata.com/Rail.svc/json/JLines?api_key=" + apiKey);
-		JsonLinesResult lines = gson.fromJson(json, JsonLinesResult.class);
+		JsonLinesResult lines = fromJson(json, JsonLinesResult.class);
 		return lines.lines;
+	}
+
+	private <T> T fromJson(String json, Class<T> jsonClass) {
+		return gson.fromJson(json, jsonClass);
 	}
 
 	private String getJsonFromUrl(String urlString) throws Exception {
