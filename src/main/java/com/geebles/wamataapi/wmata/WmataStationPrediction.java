@@ -1,6 +1,5 @@
 package com.geebles.wamataapi.wmata;
 
-import com.google.gson.annotations.SerializedName;
 
 public class WmataStationPrediction {
 	
